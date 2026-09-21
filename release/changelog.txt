@@ -349,7 +349,7 @@
  +April 06, 2013+
  -Fixed: Other possible crash by access violation.
  
-  +April 26, 2013+
+ +April 26, 2013+
  -Fixed: Another crash with access violation.
  -Somewhat Fixed: Art in UOP format now works... for some of it
  

@@ -1,4 +1,4 @@
-/*
+﻿/*
 
  **********************************************************************
  *
@@ -35,6 +35,7 @@
 #include <sys/stat.h>
 #include <DLGS.H>
 #include <WINUSER.H>
+#include <vector>
 
 HWND hwndUOClient;
 HWND hwndHoGInstance;
@@ -118,11 +119,10 @@ void AjustComboBox(CComboBox* pmyComboBox)
 	pmyComboBox->SetDroppedWidth(dx);
 }
 
-
 /////////////////////////////////////////////////////////////////////////////
 // Send UO commands
 
-bool SendToUO(CString Cmd)
+/*bool SendToUO(CString Cmd)
 {
 	EnumWindows(EnumWindowsProc, 1);
 	if (hwndUOClient)
@@ -142,7 +142,97 @@ bool SendToUO(CString Cmd)
 		pWnd->SetForegroundWindow();
 	}
 	return true;
+}*/
+
+bool SendCharsViaSendInput(CString command)
+{
+	std::vector<INPUT> inputs;
+	inputs.reserve(command.GetLength() * 2);
+
+	for (int i = 0; i < command.GetLength(); i++)
+	{
+		INPUT down = {};
+		down.type = INPUT_KEYBOARD;
+		down.ki.wScan = command[i];
+		down.ki.dwFlags = KEYEVENTF_UNICODE;
+		inputs.push_back(down);
+
+		INPUT up = {};
+		up.type = INPUT_KEYBOARD;
+		up.ki.wScan = command[i];
+		up.ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+		inputs.push_back(up);
+	}
+
+	UINT sent = SendInput((UINT)inputs.size(), inputs.data(), sizeof(INPUT));
+	return sent == inputs.size();
 }
+
+void PressEnterViaSendInput()
+{
+	INPUT down = {}; down.type = INPUT_KEYBOARD; down.ki.wVk = VK_RETURN;
+	INPUT up = {}; up.type = INPUT_KEYBOARD; up.ki.wVk = VK_RETURN; up.ki.dwFlags = KEYEVENTF_KEYUP;
+	INPUT arr[2] = { down, up };
+	SendInput(2, arr, sizeof(INPUT));
+}
+
+bool ForceSetForegroundWindow(HWND hwnd)
+{
+	if (IsIconic(hwnd)) ShowWindow(hwnd, SW_RESTORE);
+
+	DWORD foregroundTid = GetWindowThreadProcessId(GetForegroundWindow(), NULL);
+	DWORD targetTid = GetWindowThreadProcessId(hwnd, NULL);
+	DWORD currentTid = GetCurrentThreadId();
+
+	if (foregroundTid != currentTid) AttachThreadInput(currentTid, foregroundTid, TRUE);
+	if (targetTid != currentTid)     AttachThreadInput(currentTid, targetTid, TRUE);
+
+	BringWindowToTop(hwnd);
+	BOOL result = SetForegroundWindow(hwnd);
+
+	if (foregroundTid != currentTid) AttachThreadInput(currentTid, foregroundTid, FALSE);
+	if (targetTid != currentTid)     AttachThreadInput(currentTid, targetTid, FALSE);
+
+	return result != 0;
+}
+
+bool SendToUO(CString Cmd)
+{
+	EnumWindows(EnumWindowsProc, 1);
+	if (!hwndUOClient) return false;
+
+	if (!IsWindow(hwndUOClient))
+	{
+		EnumWindows(EnumWindowsProc, 1);
+	}
+
+	bool focused = ForceSetForegroundWindow(hwndUOClient);
+	Sleep(120);
+
+	if (focused && GetForegroundWindow() == hwndUOClient)
+	{
+		// ClassicUO / FWUO gibi SDL2/DirectX istemcileri için
+		PressEnterViaSendInput();
+		Sleep(60);
+		SendCharsViaSendInput(Cmd);
+		Sleep(40);
+		PressEnterViaSendInput();
+	}
+	else
+	{
+		// Focus alınamazsa eski yöntem (klasik client.exe için hâlâ işe yarıyor)
+		CWnd* pWnd = CWnd::FromHandle(hwndUOClient);
+		for (int i = 0; i < Cmd.GetLength(); i++)
+			pWnd->SendMessage(WM_CHAR, Cmd[i], 0);
+		pWnd->SendMessage(WM_CHAR, VK_RETURN, 0);
+	}
+
+	return true;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Send UO commands
+
 
 /////////////////////////////////////////////////////////////////////////////
 //Misc
@@ -172,7 +262,21 @@ WNDPROC CFolderDialog::m_wndProc = NULL;
 // Description	    : Constructor
 // Return type		: 
 // Argument         : CString* pPath ; represent string where selected folder wil be saved
-CFolderDialog::CFolderDialog(CString* pPath, CString csTitle) : CFileDialog(TRUE, NULL, _T("*..*"))
+/*CFolderDialog::CFolderDialog(CString* pPath, CString csTitle) : CFileDialog(TRUE, NULL, _T("*..*"))
+{
+	m_pPath = pPath;
+	m_Title = csTitle;
+}*/
+CFolderDialog::CFolderDialog(CString* pPath, CString csTitle)
+	: CFileDialog(
+		TRUE,                                   // bOpenFileDialog
+		NULL,                                   // lpszDefExt
+		_T(""),                                 // lpszFileName — "*..*" yerine boş
+		OFN_HIDEREADONLY | OFN_EXPLORER,        // dwFlags
+		_T("Folders|*.*|"),                     // lpszFilter — tüm klasörleri/dosyaları göster
+		NULL,                                   // pParentWnd
+		0,                                       // dwSize
+		FALSE)                                   // bVistaStyle = FALSE  <-- KRİTİK
 {
 	m_pPath = pPath;
 	m_Title = csTitle;
