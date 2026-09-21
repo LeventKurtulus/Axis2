@@ -36,6 +36,8 @@
 #include <DLGS.H>
 #include <WINUSER.H>
 #include <vector>
+#include <Psapi.h>
+#pragma comment(lib, "Psapi.lib")
 
 HWND hwndUOClient;
 HWND hwndHoGInstance;
@@ -50,7 +52,7 @@ HKEY hRegLocation;
 BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam);
 BOOL CALLBACK EnumInstanceProc(HWND hWnd, LPARAM lParam);
 
-BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
+/*BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
 {
 	// If this is the UO Client, store it and stop
 	CWnd * pWnd = CWnd::FromHandle(hWnd);
@@ -59,6 +61,64 @@ BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
 	if ( lParam )
 	{
 		if ((csTitle.Find("Ultima Online") != -1) || (csTitle.Find("UOSA") != -1) || (csTitle.Find(Main->m_csUOTitle) != -1))
+		{
+			hwndUOClient = hWnd;
+			return FALSE;
+		}
+		else
+		{
+			hwndUOClient = NULL;
+			return TRUE;
+		}
+	}
+	hwndUOClient = NULL;
+	return TRUE;
+}*/
+
+// Resolves the process name (e.g., "ClassicUO.exe") from the window handle
+CString GetProcessNameFromWindow(HWND hWnd)
+{
+	DWORD pid = 0;
+	GetWindowThreadProcessId(hWnd, &pid);
+	if (pid == 0) return _T("");
+
+	HANDLE hProc = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
+	if (!hProc) return _T("");
+
+	TCHAR path[MAX_PATH] = { 0 };
+	CString csName;
+	if (GetModuleFileNameEx(hProc, NULL, path, MAX_PATH))
+	{
+		CString csPath(path);
+		int slash = csPath.ReverseFind('\\');
+		csName = (slash != -1) ? csPath.Mid(slash + 1) : csPath;
+	}
+	CloseHandle(hProc);
+	return csName;
+}
+
+BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
+{
+	CWnd* pWnd = CWnd::FromHandle(hWnd);
+	CString csTitle;
+	pWnd->GetWindowText(csTitle);
+	if (lParam)
+	{
+		bool titleMatch =
+			(csTitle.Find("Ultima Online") != -1) ||
+			(csTitle.Find("UOSA") != -1) ||
+			(csTitle.Find("ClassicUO") != -1) ||   // <-- added
+			(csTitle.Find("FWUO") != -1) ||        // <-- added
+			(csTitle.Find("Orion") != -1) ||       // <-- added
+			(!Main->m_csUOTitle.IsEmpty() && csTitle.Find(Main->m_csUOTitle) != -1);
+
+		CString csProc = GetProcessNameFromWindow(hWnd);
+		bool procMatch =
+			(csProc.CompareNoCase(_T("ClassicUO.exe")) == 0) || 
+			(csProc.CompareNoCase(_T("FWUO.exe")) == 0) ||
+			(csProc.CompareNoCase(_T("orion.exe")) == 0);
+
+		if (titleMatch || procMatch)
 		{
 			hwndUOClient = hWnd;
 			return FALSE;

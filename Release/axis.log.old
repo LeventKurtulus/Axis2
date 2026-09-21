@@ -1,67 +1,16 @@
-2026.9.22 01:28:36 ::Starting Axis2 version 2.0.4j, built Sep 22 2026 01:28:27
-2026.9.22 01:28:36 ::Loading Default Settings
-2026.9.22 01:28:36 ::Loading Registry Settings
-2026.9.22 01:28:36 ::Looking for client installation
-2026.9.22 01:28:36 ::Couldn't open registry key Software\Sphere\GM Tools.  Last error was Input/output error
-2026.9.22 01:28:36 ::Client version is 7, 0, 117, 0
-2026.9.22 01:28:36 ::Client path is E:\Games\Electronic Arts\Ultima Online Classic\client.exe
-2026.9.22 01:28:36 ::Couldn't open registry key Software\Sphere\GM Tools.  Last error was Input/output error
-2026.9.22 01:28:36 ::Mul path is E:\Games\Electronic Arts\Ultima Online Classic\
-2026.9.22 01:28:36 ::Default profile path is C:/Sphere
-2026.9.22 01:28:36 ::ERROR: Unable to open E:\Games\Electronic Arts\Ultima Online Classic\soundidx.mul
-2026.9.22 01:28:36 ::Checking multiple instances
-2026.9.22 01:28:36 ::Creating Tabs
-2026.9.22 01:28:38 ::Finished loading Axis
-2026.9.22 01:29:00 ::Couldn't open registry key SOFTWARE\Sphere\GM Tools\Profiles\Local.  Last error was Input/output error
-2026.9.22 01:29:00 ::Couldn't open registry key SOFTWARE\Sphere\GM Tools\Profiles\Local.  Last error was Input/output error
-2026.9.22 01:29:00 ::Couldn't open registry key SOFTWARE\Sphere\GM Tools\Profiles\Local.  Last error was Input/output error
-2026.9.22 01:29:00 ::Couldn't open registry key SOFTWARE\Sphere\GM Tools\Profiles\Local.  Last error was No such file or directory
-2026.9.22 01:29:07 ::Clearing Items categories
-2026.9.22 01:29:07 ::Clearing NPCs categories
-2026.9.22 01:29:07 ::Clearing Locations categories
-2026.9.22 01:29:07 ::Loading Local Profile
-2026.9.22 01:29:07 ::Categorizing Items
-2026.9.22 01:29:07 ::Categorizing NPCs
-2026.9.22 01:29:07 ::Categorizing Locations
-2026.9.22 01:29:07 ::Loading Items Quicklist
-2026.9.22 01:29:07 ::Loading Spawns Quicklist
-2026.9.22 01:29:07 ::Loading Area Quicklist
-2026.9.22 01:29:07 ::Couldn't open registry key Software\Sphere\GM Tools.  Last error was Input/output error
-2026.9.22 01:29:13 ::Clearing Items categories
-2026.9.22 01:29:13 ::Clearing NPCs categories
-2026.9.22 01:29:13 ::Clearing Locations categories
-2026.9.22 01:29:13 ::Loading Local Profile
-2026.9.22 01:29:13 ::Categorizing Items
-2026.9.22 01:29:13 ::Categorizing NPCs
-2026.9.22 01:29:13 ::Categorizing Locations
-2026.9.22 01:29:13 ::Loading Items Quicklist
-2026.9.22 01:29:13 ::Loading Spawns Quicklist
-2026.9.22 01:29:13 ::Loading Area Quicklist
-2026.9.22 01:29:14 ::Couldn't open registry key Software\Sphere\GM Tools.  Last error was Input/output error
-2026.9.22 01:29:22 ::Clearing Items categories
-2026.9.22 01:29:22 ::Clearing NPCs categories
-2026.9.22 01:29:22 ::Clearing Locations categories
-2026.9.22 01:29:22 ::Loading Local Profile
-2026.9.22 01:29:22 ::Categorizing Items
-2026.9.22 01:29:22 ::Categorizing NPCs
-2026.9.22 01:29:22 ::Categorizing Locations
-2026.9.22 01:29:22 ::Loading Items Quicklist
-2026.9.22 01:29:22 ::Loading Spawns Quicklist
-2026.9.22 01:29:22 ::Loading Area Quicklist
-2026.9.22 01:29:22 ::Couldn't open registry key Software\Sphere\GM Tools.  Last error was Input/output error
-2026.9.22 01:29:31 ::Couldn't open registry key SOFTWARE\Sphere\GM Tools\Profiles\Local.  Last error was Input/output error
-2026.9.22 01:29:32 ::Clearing Items categories
-2026.9.22 01:29:32 ::Clearing NPCs categories
-2026.9.22 01:29:32 ::Clearing Locations categories
-2026.9.22 01:29:32 ::Loading Local Profile
-2026.9.22 01:29:32 ::Categorizing Items
-2026.9.22 01:29:32 ::Categorizing NPCs
-2026.9.22 01:29:33 ::Categorizing Locations
-2026.9.22 01:29:33 ::Loading Items Quicklist
-2026.9.22 01:29:33 ::Loading Spawns Quicklist
-2026.9.22 01:29:33 ::Loading Area Quicklist
-2026.9.22 01:29:33 ::Couldn't open registry key Software\Sphere\GM Tools.  Last error was Input/output error
-2026.9.22 01:29:46 ::Clearing Items categories
-2026.9.22 01:29:46 ::Clearing NPCs categories
-2026.9.22 01:29:46 ::Clearing Locations categories
-2026.9.22 01:29:46 ::Axis is shutting down.
+2026.9.22 02:05:05 ::Starting Axis2 version 2.0.4j, built Sep 22 2026 02:04:52
+2026.9.22 02:05:05 ::Loading Default Settings
+2026.9.22 02:05:05 ::Loading Registry Settings
+2026.9.22 02:05:05 ::Looking for client installation
+2026.9.22 02:05:05 ::Client version is 7, 0, 117, 0
+2026.9.22 02:05:05 ::Client path is E:\Games\Electronic Arts\Ultima Online Classic\client.exe
+2026.9.22 02:05:05 ::Mul path is E:\Games\Electronic Arts\Ultima Online Classic\
+2026.9.22 02:05:05 ::Default profile path is C:/Sphere
+2026.9.22 02:05:05 ::ERROR: Unable to open E:\Games\Electronic Arts\Ultima Online Classic\soundidx.mul
+2026.9.22 02:05:05 ::Checking multiple instances
+2026.9.22 02:05:05 ::Creating Tabs
+2026.9.22 02:05:07 ::Finished loading Axis
+2026.9.22 02:05:31 ::Clearing Items categories
+2026.9.22 02:05:31 ::Clearing NPCs categories
+2026.9.22 02:05:31 ::Clearing Locations categories
+2026.9.22 02:05:31 ::Axis is shutting down.
