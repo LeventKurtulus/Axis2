@@ -1,3 +1,8 @@
-**TR:** Axis, ClassicUO Launcher tarafından çalıştırılan versiyon 7x Client'lerde çalışmıyordu. Sadece Setting/General sekmesinde ki "Custom Client Title" kısmına Windows Process listesinden ki Client ismini doğru olarak girdiğinizde çalışıyordu. Artık ClassicUO Launcher tarafından çalıştırılan client'leri Axis Settings/General sekmesinden "Custom Client Title" kısmına herhangi bir girdi yapmadan görüyor.
-
-**EN:** Axis did not work with version 7x clients launched by the ClassicUO Launcher. It only worked if you correctly entered the client name—taken from the Windows Process list—in the “Custom Client Title” field under the Settings/General tab. Now, Axis can detect clients launched by the ClassicUO Launcher without requiring any entry in the “Custom Client Title” field under the Settings/General tab. 
+## TR:
+```ini
+Axis, ClassicUO Launcher tarafından çalıştırılan versiyon 7x Client'lerde çalışmıyordu. Sadece Setting/General sekmesinde ki "Custom Client Title" kısmına Windows Process listesinden ki Client ismini doğru olarak girdiğinizde çalışıyordu. Artık ClassicUO Launcher tarafından çalıştırılan client'leri Axis Settings/General sekmesinden "Custom Client Title" kısmına herhangi bir girdi yapmadan görüyor.
+```
+## EN:
+```ini
+Axis did not work with version 7x clients launched by the ClassicUO Launcher. It only worked if you correctly entered the client name—taken from the Windows Process list—in the “Custom Client Title” field under the Settings/General tab. Now, Axis can detect clients launched by the ClassicUO Launcher without requiring any entry in the “Custom Client Title” field under the Settings/General tab. 
+```
